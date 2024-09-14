@@ -26,28 +26,6 @@ public class AcceptanceContext {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> invokeGetWithToken(String path, String token,
-                                                                   Object... params) {
-        return RestAssured.given().log().all()
-                .auth().oauth2(token)
-                .when()
-                .get(path, params)
-                .then().log().all()
-                .extract();
-    }
-
-    public static ExtractableResponse<Response> invokeGetWithTokenAndQueryParams(String path,
-                                                                                 String token,
-                                                                                 Map<String, Object> params) {
-        return RestAssured.given().log().all()
-                .auth().oauth2(token)
-                .queryParams(params)
-                .when()
-                .get(path)
-                .then().log().all()
-                .extract();
-    }
-
     public static ExtractableResponse<Response> invokePost(String path, Object data) {
         return RestAssured.given().log().all()
                 .body(data)
@@ -58,22 +36,8 @@ public class AcceptanceContext {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> invokePostWithToken(String path, String token,
-                                                                    Object data) {
+    public static ExtractableResponse<Response> invokePut(String path, Object data) {
         return RestAssured.given().log().all()
-                .auth().oauth2(token)
-                .body(data)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                .post(path)
-                .then().log().all()
-                .extract();
-    }
-
-    public static ExtractableResponse<Response> invokePutWithToken(String path, String token,
-                                                                   Object data) {
-        return RestAssured.given().log().all()
-                .auth().oauth2(token)
                 .body(data)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
@@ -82,9 +46,8 @@ public class AcceptanceContext {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> invokePutWithToken(String path, String token) {
+    public static ExtractableResponse<Response> invokePut(String path) {
         return RestAssured.given().log().all()
-                .auth().oauth2(token)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
                 .put(path)
@@ -92,9 +55,8 @@ public class AcceptanceContext {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> invokePatchWithToken(String path, String token) {
+    public static ExtractableResponse<Response> invokePatch(String path) {
         return RestAssured.given().log().all()
-                .auth().oauth2(token)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
                 .patch(path)
@@ -102,9 +64,8 @@ public class AcceptanceContext {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> invokeDeleteWithToken(String path, String token) {
+    public static ExtractableResponse<Response> invokeDelete(String path) {
         return RestAssured.given().log().all()
-                .auth().oauth2(token)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
                 .delete(path)
@@ -112,13 +73,24 @@ public class AcceptanceContext {
                 .extract();
     }
 
-    public static ExtractableResponse<Response> invokeDeleteWithToken(String path, String token, Object data) {
+    public static ExtractableResponse<Response> invokeDelete(String path, Object data) {
+        return RestAssured.given().log().all()
+                .body(data)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .delete(path)
+                .then().log().all()
+                .extract();
+    }
+
+    @Deprecated
+    public static ExtractableResponse<Response> invokePostWithToken(String path, String token, Object data) {
         return RestAssured.given().log().all()
                 .auth().oauth2(token)
                 .body(data)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .delete(path)
+                .post(path)
                 .then().log().all()
                 .extract();
     }
