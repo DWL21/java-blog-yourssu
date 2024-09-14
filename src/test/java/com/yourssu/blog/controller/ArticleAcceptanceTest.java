@@ -2,6 +2,7 @@ package com.yourssu.blog.controller;
 
 import com.yourssu.blog.controller.dto.ArticleCreateRequest;
 import com.yourssu.blog.controller.dto.ArticleEditRequest;
+import com.yourssu.blog.controller.dto.ArticleRemoveRequest;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
@@ -48,6 +49,21 @@ class ArticleAcceptanceTest extends AcceptanceTest {
         assertAll(
                 () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value()),
                 () -> assertThat(actual.getTitle()).isEqualTo(request.title())
+        );
+    }
+
+    @Test
+    void 게시글_삭제를_요청한다() {
+        // Given
+        ArticleResponse article = createArticle(LEO);
+
+        // When
+        ArticleRemoveRequest request = LEO.getArticleRemoveRequest();
+
+        var response = invokeDelete("/api/articles/" + article.getArticleId(), request);
+
+        assertAll(
+                () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value())
         );
     }
 

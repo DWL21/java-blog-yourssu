@@ -2,6 +2,7 @@ package com.yourssu.blog.controller;
 
 import com.yourssu.blog.controller.dto.ArticleCreateRequest;
 import com.yourssu.blog.controller.dto.ArticleEditRequest;
+import com.yourssu.blog.controller.dto.ArticleRemoveRequest;
 import com.yourssu.blog.service.ArticleService;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,11 @@ public class ArticleController {
     public ResponseEntity<ArticleResponse> edit(@PathVariable Long articleId, @RequestBody ArticleEditRequest request) {
         ArticleResponse article = articleService.update(request.toArticleUpdatedRequest(articleId));
         return ResponseEntity.status(HttpStatus.CREATED).body(article);
+    }
+
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity<Void> remove(@PathVariable Long articleId, @RequestBody ArticleRemoveRequest request) {
+        articleService.delete(request.toArticleDeleteRequest(articleId));
+        return ResponseEntity.noContent().build();
     }
 }
