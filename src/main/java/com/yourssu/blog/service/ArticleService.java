@@ -28,4 +28,12 @@ public class ArticleService {
         Article savedArticle = articleRepository.save(article);
         return ArticleResponse.of(savedArticle);
     }
+
+    @Transactional
+    public ArticleResponse update(final ArticleUpdateRequest request) {
+        Article article = request.getArticle();
+        Article updatedArticle = articleRepository.get(article.getArticleId());
+        updatedArticle.update(article);
+        return ArticleResponse.of(updatedArticle);
+    }
 }

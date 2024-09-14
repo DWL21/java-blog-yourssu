@@ -1,16 +1,21 @@
 package com.yourssu.blog.support.common.fixture;
 
 import com.yourssu.blog.controller.dto.ArticleCreateRequest;
+import com.yourssu.blog.controller.dto.ArticleEditRequest;
 import com.yourssu.blog.model.Article;
 import com.yourssu.blog.service.dto.ArticleSaveRequest;
-import org.apache.catalina.User;
+import com.yourssu.blog.service.dto.ArticleUpdateRequest;
 
 public enum ArticleFixture {
 
     LEO(UserFixture.LEO,
             "leo title",
             "leo context"
-    );
+    ),
+    EVOLVED_LEO(UserFixture.LEO,
+            "leo evolved title",
+            "leo evolved context"
+            );
 
     private final UserFixture userFixture;
     private final String title;
@@ -32,5 +37,13 @@ public enum ArticleFixture {
 
     public ArticleSaveRequest getArticleSaveRequest() {
         return new ArticleSaveRequest(userFixture.getEmail(), userFixture.getPassword(), title, context);
+    }
+
+    public ArticleEditRequest getArticleEditRequest() {
+        return new ArticleEditRequest(userFixture.getEmail(), userFixture.getPassword(), title, context);
+    }
+
+    public ArticleUpdateRequest getArticleUpdateRequest(Long articleId) {
+        return new ArticleUpdateRequest(articleId, userFixture.getEmail(), userFixture.getPassword(), title, context);
     }
 }
