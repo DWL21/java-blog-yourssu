@@ -34,4 +34,9 @@ public class Article extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
+    public void update(Article article) {
+        this.title = article.title;
+        this.content = article.content;
+    }
 }
