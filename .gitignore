@@ -22,3 +22,5 @@ gradle-app.setting
 
 # Springboot Settings
 application-dev.yml
+/.idea/compiler.xml
+application.yml
