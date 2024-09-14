@@ -4,6 +4,7 @@ import com.yourssu.blog.model.Article;
 import com.yourssu.blog.model.repository.ArticleRepository;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import com.yourssu.blog.service.dto.ArticleSaveRequest;
+import com.yourssu.blog.service.dto.ArticleUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class ArticleService {
     @Transactional
     public ArticleResponse saveArticle(final ArticleSaveRequest request) {
         Article article = request.getArticle();
-        articleRepository.save(article);
-        return ArticleResponse.of(article);
+        Article savedArticle = articleRepository.save(article);
+        return ArticleResponse.of(savedArticle);
     }
 }
