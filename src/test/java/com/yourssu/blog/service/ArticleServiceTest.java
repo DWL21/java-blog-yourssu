@@ -1,5 +1,6 @@
 package com.yourssu.blog.service;
 
+import com.yourssu.blog.service.dto.ArticleDeleteRequest;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import com.yourssu.blog.service.dto.ArticleSaveRequest;
 import com.yourssu.blog.service.dto.ArticleUpdateRequest;
@@ -36,6 +37,18 @@ class ArticleServiceTest {
 
         assertThatNoException().isThrownBy(
                 () -> articleService.update(request)
+        );
+    }
+
+    @Test
+    @DisplayName("게시글을 삭제한다.")
+    void delete() {
+        ArticleResponse given = articleService.saveArticle(LEO.getArticleSaveRequest());
+
+        ArticleDeleteRequest request = LEO.getArticleDeleteRequest(given.getArticleId());
+
+        assertThatNoException().isThrownBy(
+                () -> articleService.delete(request)
         );
     }
 }

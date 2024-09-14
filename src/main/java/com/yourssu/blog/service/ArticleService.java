@@ -2,6 +2,7 @@ package com.yourssu.blog.service;
 
 import com.yourssu.blog.model.Article;
 import com.yourssu.blog.model.repository.ArticleRepository;
+import com.yourssu.blog.service.dto.ArticleDeleteRequest;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import com.yourssu.blog.service.dto.ArticleSaveRequest;
 import com.yourssu.blog.service.dto.ArticleUpdateRequest;
@@ -35,5 +36,10 @@ public class ArticleService {
         Article updatedArticle = articleRepository.get(article.getArticleId());
         updatedArticle.update(article);
         return ArticleResponse.of(updatedArticle);
+    }
+
+    public void delete(final ArticleDeleteRequest request) {
+        Article article = articleRepository.get(request.articleId());
+        articleRepository.delete(article);
     }
 }

@@ -2,7 +2,9 @@ package com.yourssu.blog.support.common.fixture;
 
 import com.yourssu.blog.controller.dto.ArticleCreateRequest;
 import com.yourssu.blog.controller.dto.ArticleEditRequest;
+import com.yourssu.blog.controller.dto.ArticleRemoveRequest;
 import com.yourssu.blog.model.Article;
+import com.yourssu.blog.service.dto.ArticleDeleteRequest;
 import com.yourssu.blog.service.dto.ArticleSaveRequest;
 import com.yourssu.blog.service.dto.ArticleUpdateRequest;
 
@@ -46,4 +48,13 @@ public enum ArticleFixture {
     public ArticleUpdateRequest getArticleUpdateRequest(Long articleId) {
         return new ArticleUpdateRequest(articleId, userFixture.getEmail(), userFixture.getPassword(), title, context);
     }
+
+    public ArticleRemoveRequest getArticleRemoveRequest() {
+        return new ArticleRemoveRequest(userFixture.getEmail(), userFixture.getPassword());
+    }
+
+    public ArticleDeleteRequest getArticleDeleteRequest(Long articleId) {
+        return new ArticleDeleteRequest(articleId, userFixture.getEmail(), userFixture.getPassword());
+    }
+
 }
