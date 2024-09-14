@@ -1,14 +1,15 @@
 package com.yourssu.blog.controller;
 
 import com.yourssu.blog.controller.dto.ArticleCreateRequest;
+import com.yourssu.blog.controller.dto.ArticleEditRequest;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import static com.yourssu.blog.support.acceptance.AcceptanceContext.invokeGet;
-import static com.yourssu.blog.support.acceptance.AcceptanceContext.invokePost;
+import static com.yourssu.blog.support.acceptance.AcceptanceContext.*;
+import static com.yourssu.blog.support.common.fixture.ArticleFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -18,8 +19,7 @@ class ArticleAcceptanceTest extends AcceptanceTest {
     @Test
     void 게시글_생성을_요청한다() {
         // Given
-        ArticleFixture article = ArticleFixture.LEO;
-        ArticleCreateRequest request = article.getArticleCreateRequest();
+        ArticleCreateRequest request = LEO.getArticleCreateRequest();
 
         // When
         invokePost("/api/articles", request);
@@ -32,5 +32,27 @@ class ArticleAcceptanceTest extends AcceptanceTest {
                 () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value()),
                 () -> assertThat(actual.getArticleId()).isEqualTo(1)
         );
+    }
+
+    @Test
+    void 게시글_수정을_요청한다() {
+        // Given
+        ArticleResponse article = createArticle(LEO);
+
+        // When
+        ArticleEditRequest request = EVOLVED_LEO.getArticleEditRequest();
+
+        var response = invokePut("/api/articles/" + article.getArticleId(), request);
+        ArticleResponse actual = response.as(ArticleResponse.class);
+
+        assertAll(
+                () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value()),
+                () -> assertThat(actual.getTitle()).isEqualTo(request.title())
+        );
+    }
+
+    private static ArticleResponse createArticle(ArticleFixture article) {
+        ArticleCreateRequest request = article.getArticleCreateRequest();
+        return invokePost("/api/articles", request).as(ArticleResponse.class);
     }
 }
