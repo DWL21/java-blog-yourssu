@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/articles")
+@RequestMapping("/api/articles/{articleId}/comments")
 public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/{articleId}/comments/{commentId}")
+    @GetMapping("/{commentId}")
     public ResponseEntity<CommentResponse> show(@PathVariable Long articleId, @PathVariable Long commentId) {
         CommentResponse comment = commentService.findCommentById(new CommentRequest(articleId, commentId));
         return ResponseEntity.ok(comment);
     }
 
-    @PostMapping("/{articleId}/comments")
+    @PostMapping
     public ResponseEntity<CommentResponse> create(@PathVariable Long articleId, @RequestBody CommentCreateRequest request) {
         CommentResponse comment = commentService.save(request.toCommentSaveRequest(articleId));
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
