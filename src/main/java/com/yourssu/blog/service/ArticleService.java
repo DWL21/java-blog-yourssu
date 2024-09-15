@@ -30,10 +30,9 @@ public class ArticleService {
     }
 
     public ArticleResponse update(final ArticleUpdateRequest request) {
-        Article article = request.getArticle();
-        Article updatedArticle = articleRepository.get(article.getArticleId());
-        updatedArticle.update(article);
-        return ArticleResponse.of(updatedArticle);
+        Article article = articleRepository.get(request.articleId());
+        article.update(request.getArticle());
+        return ArticleResponse.of(article);
     }
 
     public void delete(final ArticleDeleteRequest request) {
