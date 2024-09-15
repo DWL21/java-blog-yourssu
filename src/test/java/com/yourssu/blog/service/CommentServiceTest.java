@@ -2,9 +2,7 @@ package com.yourssu.blog.service;
 
 import com.yourssu.blog.model.Article;
 import com.yourssu.blog.model.repository.ArticleRepository;
-import com.yourssu.blog.service.dto.CommentResponse;
-import com.yourssu.blog.service.dto.CommentSaveRequest;
-import com.yourssu.blog.service.dto.CommentUpdateRequest;
+import com.yourssu.blog.service.dto.*;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import com.yourssu.blog.support.service.ApplicationTest;
 import org.junit.jupiter.api.DisplayName;
@@ -45,6 +43,19 @@ class CommentServiceTest {
 
         assertThatNoException().isThrownBy(
                 () -> commentService.update(request)
+        );
+    }
+
+    @Test
+    @DisplayName("댓글을 삭제한다.")
+    void delete() {
+        Article article = saveArticle(ArticleFixture.LEO);
+        CommentResponse given = commentService.save(LEO.getCommentSaveRequest(article));
+
+        CommentDeleteRequest request = LEO.getCommentDeleteRequest(article, given.getCommentId());
+
+        assertThatNoException().isThrownBy(
+                () -> commentService.delete(request)
         );
     }
 

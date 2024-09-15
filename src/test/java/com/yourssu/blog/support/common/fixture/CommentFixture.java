@@ -2,8 +2,10 @@ package com.yourssu.blog.support.common.fixture;
 
 import com.yourssu.blog.controller.dto.CommentCreateRequest;
 import com.yourssu.blog.controller.dto.CommentEditRequest;
+import com.yourssu.blog.controller.dto.CommentRemoveRequest;
 import com.yourssu.blog.model.Article;
 import com.yourssu.blog.model.Comment;
+import com.yourssu.blog.service.dto.CommentDeleteRequest;
 import com.yourssu.blog.service.dto.CommentRequest;
 import com.yourssu.blog.service.dto.CommentSaveRequest;
 import com.yourssu.blog.service.dto.CommentUpdateRequest;
@@ -45,5 +47,17 @@ public enum CommentFixture {
                 userFixture.getEmail(),
                 userFixture.getPassword(),
                 content);
+    }
+
+    public CommentRemoveRequest getCommentRemoveRequest() {
+        return new CommentRemoveRequest(userFixture.getEmail(), userFixture.getPassword());
+    }
+
+    public CommentDeleteRequest getCommentDeleteRequest(Article article, Long commentId) {
+        return new CommentDeleteRequest(
+                new CommentRequest(article.getArticleId(), commentId),
+                userFixture.getEmail(),
+                userFixture.getPassword()
+        );
     }
 }
