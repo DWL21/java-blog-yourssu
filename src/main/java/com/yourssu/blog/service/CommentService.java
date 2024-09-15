@@ -4,10 +4,7 @@ import com.yourssu.blog.model.Article;
 import com.yourssu.blog.model.Comment;
 import com.yourssu.blog.model.repository.ArticleRepository;
 import com.yourssu.blog.model.repository.CommentRepository;
-import com.yourssu.blog.service.dto.CommentRequest;
-import com.yourssu.blog.service.dto.CommentResponse;
-import com.yourssu.blog.service.dto.CommentSaveRequest;
-import com.yourssu.blog.service.dto.CommentUpdateRequest;
+import com.yourssu.blog.service.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,5 +34,10 @@ public class CommentService {
         Comment comment = commentRepository.get(request.commentId());
         comment.update(request.getComment(article));
         return CommentResponse.of(comment);
+    }
+
+    public void delete(CommentDeleteRequest request) {
+        Comment comment = commentRepository.get(request.commentId());
+        commentRepository.delete(comment);
     }
 }
