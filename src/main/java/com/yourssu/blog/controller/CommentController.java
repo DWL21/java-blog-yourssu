@@ -2,10 +2,10 @@ package com.yourssu.blog.controller;
 
 import com.yourssu.blog.controller.dto.CommentCreateRequest;
 import com.yourssu.blog.controller.dto.CommentEditRequest;
+import com.yourssu.blog.controller.dto.CommentRemoveRequest;
 import com.yourssu.blog.service.CommentService;
 import com.yourssu.blog.service.dto.CommentRequest;
 import com.yourssu.blog.service.dto.CommentResponse;
-import com.yourssu.blog.service.dto.CommentUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +34,11 @@ public class CommentController {
     public ResponseEntity<CommentResponse> edit(@PathVariable Long articleId, @PathVariable Long commentId, @RequestBody CommentEditRequest request) {
         CommentResponse response = commentService.update(request.toCommentUpdateRequest(articleId, commentId));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<Void> delete(@PathVariable Long articleId, @PathVariable Long commentId, @RequestBody CommentRemoveRequest request) {
+        commentService.delete(request.toDeleteRequest(articleId, commentId));
+        return ResponseEntity.noContent().build();
     }
 }
