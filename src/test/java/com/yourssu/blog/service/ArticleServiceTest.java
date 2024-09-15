@@ -24,14 +24,14 @@ class ArticleServiceTest {
         ArticleSaveRequest request = LEO.getArticleSaveRequest();
 
         assertThatNoException().isThrownBy(
-                () -> articleService.saveArticle(request)
+                () -> articleService.save(request)
         );
     }
 
     @Test
     @DisplayName("게시글을 수정한다.")
     void update() {
-        ArticleResponse given = articleService.saveArticle(LEO.getArticleSaveRequest());
+        ArticleResponse given = articleService.save(LEO.getArticleSaveRequest());
 
         ArticleUpdateRequest request = EVOLVED_LEO.getArticleUpdateRequest(given.getArticleId());
 
@@ -43,7 +43,7 @@ class ArticleServiceTest {
     @Test
     @DisplayName("게시글을 삭제한다.")
     void delete() {
-        ArticleResponse given = articleService.saveArticle(LEO.getArticleSaveRequest());
+        ArticleResponse given = articleService.save(LEO.getArticleSaveRequest());
 
         ArticleDeleteRequest request = LEO.getArticleDeleteRequest(given.getArticleId());
 

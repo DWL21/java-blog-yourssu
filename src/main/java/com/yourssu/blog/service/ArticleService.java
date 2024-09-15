@@ -23,7 +23,7 @@ public class ArticleService {
         return ArticleResponse.of(article);
     }
 
-    public ArticleResponse saveArticle(final ArticleSaveRequest request) {
+    public ArticleResponse save(final ArticleSaveRequest request) {
         Article article = request.getArticle();
         Article savedArticle = articleRepository.save(article);
         return ArticleResponse.of(savedArticle);
