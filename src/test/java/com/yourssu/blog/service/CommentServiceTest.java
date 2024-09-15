@@ -2,13 +2,16 @@ package com.yourssu.blog.service;
 
 import com.yourssu.blog.model.Article;
 import com.yourssu.blog.model.repository.ArticleRepository;
+import com.yourssu.blog.service.dto.CommentResponse;
 import com.yourssu.blog.service.dto.CommentSaveRequest;
+import com.yourssu.blog.service.dto.CommentUpdateRequest;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import com.yourssu.blog.support.service.ApplicationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.yourssu.blog.support.common.fixture.CommentFixture.EVOLVED_LEO;
 import static com.yourssu.blog.support.common.fixture.CommentFixture.LEO;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -29,6 +32,19 @@ class CommentServiceTest {
 
         assertThatNoException().isThrownBy(
                 () -> commentService.save(request)
+        );
+    }
+
+    @Test
+    @DisplayName("댓글을 수정한다.")
+    void update() {
+        Article article = saveArticle(ArticleFixture.LEO);
+        CommentResponse given = commentService.save(LEO.getCommentSaveRequest(article));
+
+        CommentUpdateRequest request = EVOLVED_LEO.getCommentUpdateRequest(article, given.getCommentId());
+
+        assertThatNoException().isThrownBy(
+                () -> commentService.update(request)
         );
     }
 
