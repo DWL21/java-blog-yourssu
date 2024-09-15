@@ -67,7 +67,7 @@ class ArticleAcceptanceTest extends AcceptanceTest {
         );
     }
 
-    private static ArticleResponse createArticle(ArticleFixture article) {
+    public static ArticleResponse createArticle(ArticleFixture article) {
         ArticleCreateRequest request = article.getArticleCreateRequest();
         return invokePost("/api/articles", request).as(ArticleResponse.class);
     }
