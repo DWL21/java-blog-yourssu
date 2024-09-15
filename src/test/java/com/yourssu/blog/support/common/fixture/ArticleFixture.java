@@ -56,5 +56,4 @@ public enum ArticleFixture {
     public ArticleDeleteRequest getArticleDeleteRequest(Long articleId) {
         return new ArticleDeleteRequest(articleId, userFixture.getEmail(), userFixture.getPassword());
     }
-
 }

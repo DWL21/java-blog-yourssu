@@ -34,4 +34,8 @@ public class Comment extends BaseEntity {
         this.email = email;
         this.content = content;
     }
+
+    public void update(Comment comment) {
+        this.content = comment.content;
+    }
 }
