@@ -1,5 +1,6 @@
 package com.yourssu.blog.service;
 
+import com.yourssu.blog.config.support.Encrypt;
 import com.yourssu.blog.config.support.JwtTokenProvider;
 import com.yourssu.blog.model.User;
 import com.yourssu.blog.model.repository.UserRepository;
@@ -21,15 +22,18 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final Encrypt encrypt;
 
 
-    public UserResponse save(UserSaveRequest userSaveRequest) {
-        User user = userRepository.save(userSaveRequest.toUser());
+    public UserResponse save(UserSaveRequest request) {
+        User user = new User(request.email(), encrypt.encrypt(request.password()), request.username());
+        userRepository.save(user);
         return UserResponse.of(user);
     }
 
     public TokenResponse issueToken(TokenIssueRequest request) {
         User user = userRepository.getByEmail(request.email());
+        user.validatePassword(encrypt.encrypt(request.password()));
         return TokenResponse.of(generateToken(user));
     }
 

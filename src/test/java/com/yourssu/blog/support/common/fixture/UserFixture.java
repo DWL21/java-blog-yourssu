@@ -11,6 +11,10 @@ public enum UserFixture {
     LEO("leo@yourssu.com",
             "leoPassword",
             "leo"
+    ),
+    LEO_PASSWORD_INCORRECT("leo@yourssu.com",
+                "incorrectPassword",
+                "leo"
     );
 
     private final String email;
