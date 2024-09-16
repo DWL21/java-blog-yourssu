@@ -34,4 +34,20 @@ public enum UserFixture {
     public String getPassword() {
         return password;
     }
+
+    public UserCreateRequest getUserCreateRequest() {
+        return new UserCreateRequest(email, password, username);
+    }
+
+    public UserSaveRequest getUserSaveRequest() {
+        return new UserSaveRequest(email, password, username);
+    }
+
+    public AuthenticateRequest getAuthenticateRequest() {
+        return new AuthenticateRequest(email, password);
+    }
+
+    public TokenIssueRequest getTokenIssueRequest() {
+        return new TokenIssueRequest(email, password);
+    }
 }
