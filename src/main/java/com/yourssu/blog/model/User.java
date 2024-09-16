@@ -35,4 +35,10 @@ public class User extends BaseEntity {
         this.password = password;
         this.username = username;
     }
+
+    public void validatePassword(String password) {
+        if (!this.password.equals(password)) {
+            throw new IllegalArgumentException("Password does not match");
+        }
+    }
 }
