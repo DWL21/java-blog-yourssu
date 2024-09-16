@@ -15,6 +15,8 @@ public class JwtTokenProvider {
     private final SecretKey secretKey;
     private final long expirationTime;
 
+    private final String TOKEN_SIGN = "Bearer ";
+
     public JwtTokenProvider(@Value("${security.jwt.token.secret-key}") final String secretKey,
                             @Value("${security.jwt.token.expiration-time}") final Long expirationTime) {
         this.secretKey = getSigningKey(secretKey);
@@ -38,7 +40,14 @@ public class JwtTokenProvider {
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
-                .parseSignedClaims(token)
+                .parseSignedClaims(trimBearer(token))
                 .getPayload();
+    }
+
+    private String trimBearer(String token) {
+        if (token.startsWith(TOKEN_SIGN)) {
+            return token.substring(TOKEN_SIGN.length());
+        }
+        return token;
     }
 }
