@@ -20,3 +20,5 @@ security:
     token:
       secret-key: yourssu001yourssu002yourssu003yourssu004yourssu005
       expiration-time: 3600000
+  encrypt:
+    salt: yourssu001yourssu002yourssu003yourssu004
