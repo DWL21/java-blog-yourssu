@@ -1,20 +1,30 @@
 package com.yourssu.blog.support.common.fixture;
 
+import com.yourssu.blog.controller.dto.AuthenticateRequest;
+import com.yourssu.blog.controller.dto.UserCreateRequest;
+import com.yourssu.blog.model.User;
+import com.yourssu.blog.service.dto.TokenIssueRequest;
+import com.yourssu.blog.service.dto.UserSaveRequest;
+
 public enum UserFixture {
 
     LEO("leo@yourssu.com",
-            "leo",
-            "leoPassword"
+            "leoPassword",
+            "leo"
     );
 
     private final String email;
-    private final String name;
     private final String password;
+    private final String username;
 
-    UserFixture(String email, String name, String password) {
+    UserFixture(String email, String password, String username) {
         this.email = email;
-        this.name = name;
         this.password = password;
+        this.username = username;
+    }
+
+    public User getUser() {
+        return new User(email, password, username);
     }
 
     public String getEmail() {
