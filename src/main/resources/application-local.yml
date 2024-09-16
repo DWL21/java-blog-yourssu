@@ -17,3 +17,9 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
+security:
+  jwt:
+    token:
+      secret-key: yourssu001yourssu002yourssu003yourssu004yourssu005
+      expiration-time: 3600000
