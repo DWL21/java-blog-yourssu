@@ -2,15 +2,17 @@ package com.yourssu.blog.controller;
 
 import com.yourssu.blog.controller.dto.CommentCreateRequest;
 import com.yourssu.blog.controller.dto.CommentEditRequest;
-import com.yourssu.blog.controller.dto.CommentRemoveRequest;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import com.yourssu.blog.service.dto.CommentResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import com.yourssu.blog.support.common.fixture.CommentFixture;
+import com.yourssu.blog.support.common.fixture.UserFixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
+import static com.yourssu.blog.controller.UserAcceptanceTest.authenticate;
+import static com.yourssu.blog.controller.UserAcceptanceTest.createUser;
 import static com.yourssu.blog.support.acceptance.AcceptanceContext.*;
 import static com.yourssu.blog.support.common.fixture.CommentFixture.EVOLVED_LEO;
 import static com.yourssu.blog.support.common.fixture.CommentFixture.LEO;
@@ -23,11 +25,13 @@ public class CommentAcceptanceTest extends AcceptanceTest {
     @Test
     void 댓글_생성을_요청한다() {
         // Given
-        ArticleResponse article = ArticleAcceptanceTest.createArticle(ArticleFixture.LEO);
+        createUser(UserFixture.LEO);
+        String token = authenticate(UserFixture.LEO).getToken();
+        ArticleResponse article = ArticleAcceptanceTest.createArticle(ArticleFixture.LEO, token);
         CommentCreateRequest request = LEO.getCommentCreateRequest();
 
         // When
-        var response = invokePost(generateCommentRequestUri(article.getArticleId()), request);
+        var response = invokePostWithToken(generateCommentRequestUri(article.getArticleId()), token, request);
 
         //Then
         CommentResponse actual = response.as(CommentResponse.class);
@@ -41,13 +45,15 @@ public class CommentAcceptanceTest extends AcceptanceTest {
     @Test
     void 댓글_수정을_요청한다() {
         // Given
-        ArticleResponse article = ArticleAcceptanceTest.createArticle(ArticleFixture.LEO);
-        CommentResponse comment = createComment(article.getArticleId(), LEO);
+        createUser(UserFixture.LEO);
+        String token = authenticate(UserFixture.LEO).getToken();
+        ArticleResponse article = ArticleAcceptanceTest.createArticle(ArticleFixture.LEO, token);
+        CommentResponse comment = createComment(article.getArticleId(), LEO, token);
 
         // When
         CommentEditRequest request = EVOLVED_LEO.getCommentEditRequest();
 
-        var response = invokePut(generateCommentRequestUri(article.getArticleId(), comment.getCommentId()), request);
+        var response = invokePutWihToken(generateCommentRequestUri(article.getArticleId(), comment.getCommentId()), token, request);
         CommentResponse actual = response.as(CommentResponse.class);
 
         assertAll(
@@ -59,13 +65,13 @@ public class CommentAcceptanceTest extends AcceptanceTest {
     @Test
     void 댓글_삭제를_요청한다() {
         // Given
-        ArticleResponse article = ArticleAcceptanceTest.createArticle(ArticleFixture.LEO);
-        CommentResponse comment = createComment(article.getArticleId(), LEO);
+        createUser(UserFixture.LEO);
+        String token = authenticate(UserFixture.LEO).getToken();
+        ArticleResponse article = ArticleAcceptanceTest.createArticle(ArticleFixture.LEO, token);
+        CommentResponse comment = createComment(article.getArticleId(), LEO, token);
 
         // When
-        CommentRemoveRequest request = LEO.getCommentRemoveRequest();
-
-        var response = invokeDelete(generateCommentRequestUri(article.getArticleId(), comment.getCommentId()), request);
+        var response = invokeDeleteWithToken(generateCommentRequestUri(article.getArticleId(), comment.getCommentId()), token);
 
         assertAll(
                 () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value())
@@ -80,8 +86,8 @@ public class CommentAcceptanceTest extends AcceptanceTest {
         return "/api/articles/" + articleId + "/comments/" + commentId;
     }
 
-    public static CommentResponse createComment(Long articleId, CommentFixture comment) {
+    public static CommentResponse createComment(Long articleId, CommentFixture comment, String token) {
         CommentCreateRequest request = comment.getCommentCreateRequest();
-        return invokePost(generateCommentRequestUri(articleId), request).as(CommentResponse.class);
+        return invokePostWithToken(generateCommentRequestUri(articleId), token, request).as(CommentResponse.class);
     }
 }

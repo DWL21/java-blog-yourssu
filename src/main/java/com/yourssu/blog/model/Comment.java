@@ -19,24 +19,39 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
-    @Column(nullable = false)
-    private String email;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false)
     private String content;
 
-    public Comment(Article article, String email, String content) {
-        this(null, article, email, content);
+    public Comment(Article article, User user, String content) {
+        this(null, article, user, content);
     }
 
-    public Comment(Long commentId, Article article, String email, String content) {
+    public Comment(Long commentId, Article article, User user, String content) {
         this.commentId = commentId;
         this.article = article;
-        this.email = email;
+        this.user = user;
         this.content = content;
     }
 
     public void update(Comment comment) {
+        validateUser(comment.user);
+        validateArticle(comment.article);
         this.content = comment.content;
+    }
+
+    public void validateUser(User user) {
+        if (!this.user.equals(user)) {
+            throw new IllegalArgumentException("Article does not belong to user");
+        }
+    }
+
+    public void validateArticle(Article article) {
+        if (!article.equals(this.article)) {
+            throw new IllegalArgumentException("Article does not belong to article");
+        }
     }
 }

@@ -1,9 +1,12 @@
 package com.yourssu.blog.service;
 
 import com.yourssu.blog.model.Article;
+import com.yourssu.blog.model.User;
 import com.yourssu.blog.model.repository.ArticleRepository;
+import com.yourssu.blog.model.repository.UserRepository;
 import com.yourssu.blog.service.dto.*;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
+import com.yourssu.blog.support.common.fixture.UserFixture;
 import com.yourssu.blog.support.service.ApplicationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,13 +23,17 @@ class CommentServiceTest {
     private CommentService commentService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ArticleRepository articleRepository;
 
     @Test
     @DisplayName("댓글을 생성한다.")
     void save() {
-        Article article = saveArticle(ArticleFixture.LEO);
-        CommentSaveRequest request = LEO.getCommentSaveRequest(article);
+        User user = saveUser(UserFixture.LEO);
+        Article article = saveArticle(ArticleFixture.LEO, user);
+        CommentSaveRequest request = LEO.getCommentSaveRequest(article, user.getId());
 
         assertThatNoException().isThrownBy(
                 () -> commentService.save(request)
@@ -36,10 +43,11 @@ class CommentServiceTest {
     @Test
     @DisplayName("댓글을 수정한다.")
     void update() {
-        Article article = saveArticle(ArticleFixture.LEO);
-        CommentResponse given = commentService.save(LEO.getCommentSaveRequest(article));
+        User user = saveUser(UserFixture.LEO);
+        Article article = saveArticle(ArticleFixture.LEO, user);
+        CommentResponse given = commentService.save(LEO.getCommentSaveRequest(article, user.getId()));
 
-        CommentUpdateRequest request = EVOLVED_LEO.getCommentUpdateRequest(article, given.getCommentId());
+        CommentUpdateRequest request = EVOLVED_LEO.getCommentUpdateRequest(article, given.getCommentId(), user.getId());
 
         assertThatNoException().isThrownBy(
                 () -> commentService.update(request)
@@ -49,17 +57,22 @@ class CommentServiceTest {
     @Test
     @DisplayName("댓글을 삭제한다.")
     void delete() {
-        Article article = saveArticle(ArticleFixture.LEO);
-        CommentResponse given = commentService.save(LEO.getCommentSaveRequest(article));
+        User user = saveUser(UserFixture.LEO);
+        Article article = saveArticle(ArticleFixture.LEO, user);
+        CommentResponse given = commentService.save(LEO.getCommentSaveRequest(article, user.getId()));
 
-        CommentDeleteRequest request = LEO.getCommentDeleteRequest(article, given.getCommentId());
+        CommentDeleteRequest request = LEO.getCommentDeleteRequest(article, given.getCommentId(), user.getId());
 
         assertThatNoException().isThrownBy(
                 () -> commentService.delete(request)
         );
     }
 
-    private Article saveArticle(ArticleFixture article) {
-        return articleRepository.save(article.getArticle());
+    private User saveUser(UserFixture user) {
+        return userRepository.save(user.getUser());
+    }
+
+    private Article saveArticle(ArticleFixture article, User user) {
+        return articleRepository.save(article.getArticle(user));
     }
 }

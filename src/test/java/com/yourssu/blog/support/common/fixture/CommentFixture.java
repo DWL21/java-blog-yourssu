@@ -2,9 +2,9 @@ package com.yourssu.blog.support.common.fixture;
 
 import com.yourssu.blog.controller.dto.CommentCreateRequest;
 import com.yourssu.blog.controller.dto.CommentEditRequest;
-import com.yourssu.blog.controller.dto.CommentRemoveRequest;
 import com.yourssu.blog.model.Article;
 import com.yourssu.blog.model.Comment;
+import com.yourssu.blog.model.User;
 import com.yourssu.blog.service.dto.CommentDeleteRequest;
 import com.yourssu.blog.service.dto.CommentRequest;
 import com.yourssu.blog.service.dto.CommentSaveRequest;
@@ -12,52 +12,39 @@ import com.yourssu.blog.service.dto.CommentUpdateRequest;
 
 public enum CommentFixture {
 
-    LEO(UserFixture.LEO,
-            "leo comment"),
-    EVOLVED_LEO(UserFixture.LEO,
-            "leo evolved comment");
+    LEO("leo comment"),
+    EVOLVED_LEO("leo evolved comment");
 
-    private final UserFixture userFixture;
     private final String content;
 
-    CommentFixture(UserFixture userFixture, String content) {
-        this.userFixture = userFixture;
+    CommentFixture(String content) {
         this.content = content;
     }
 
-    public Comment getComment(Article article) {
-        return new Comment(article, userFixture.getEmail(), content);
+    public Comment getComment(Article article, User user) {
+        return new Comment(article, user, content);
     }
 
     public CommentCreateRequest getCommentCreateRequest() {
-        return new CommentCreateRequest(userFixture.getEmail(), userFixture.getPassword(), content);
+        return new CommentCreateRequest(content);
     }
 
-    public CommentSaveRequest getCommentSaveRequest(Article article) {
-        return new CommentSaveRequest(article.getArticleId(), userFixture.getEmail(), userFixture.getPassword(), content);
+    public CommentSaveRequest getCommentSaveRequest(Article article, Long userId) {
+        return new CommentSaveRequest(article.getArticleId(), userId, content);
     }
 
     public CommentEditRequest getCommentEditRequest() {
-        return new CommentEditRequest(userFixture.getEmail(), userFixture.getPassword(), content);
+        return new CommentEditRequest(content);
     }
 
-    public CommentUpdateRequest getCommentUpdateRequest(Article article, Long commentId) {
+    public CommentUpdateRequest getCommentUpdateRequest(Article article, Long commentId, Long userId) {
         return new CommentUpdateRequest(
                 new CommentRequest(article.getArticleId(), commentId),
-                userFixture.getEmail(),
-                userFixture.getPassword(),
+                userId,
                 content);
     }
 
-    public CommentRemoveRequest getCommentRemoveRequest() {
-        return new CommentRemoveRequest(userFixture.getEmail(), userFixture.getPassword());
-    }
-
-    public CommentDeleteRequest getCommentDeleteRequest(Article article, Long commentId) {
-        return new CommentDeleteRequest(
-                new CommentRequest(article.getArticleId(), commentId),
-                userFixture.getEmail(),
-                userFixture.getPassword()
-        );
+    public CommentDeleteRequest getCommentDeleteRequest(Article article, Long commentId, Long userId) {
+        return new CommentDeleteRequest(new CommentRequest(article.getArticleId(), commentId), userId);
     }
 }
