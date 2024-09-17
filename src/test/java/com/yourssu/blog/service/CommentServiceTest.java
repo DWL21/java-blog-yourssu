@@ -1,14 +1,10 @@
 package com.yourssu.blog.service;
 
-import com.yourssu.blog.article.model.Article;
-import com.yourssu.blog.comment.service.CommentService;
-import com.yourssu.blog.comment.service.dto.CommentDeleteRequest;
-import com.yourssu.blog.comment.service.dto.CommentResponse;
-import com.yourssu.blog.comment.service.dto.CommentSaveRequest;
-import com.yourssu.blog.comment.service.dto.CommentUpdateRequest;
-import com.yourssu.blog.user.model.User;
-import com.yourssu.blog.article.model.repository.ArticleRepository;
-import com.yourssu.blog.user.model.repository.UserRepository;
+import com.yourssu.blog.model.Article;
+import com.yourssu.blog.model.User;
+import com.yourssu.blog.model.repository.ArticleRepository;
+import com.yourssu.blog.model.repository.UserRepository;
+import com.yourssu.blog.service.dto.*;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import com.yourssu.blog.support.common.fixture.UserFixture;
 import com.yourssu.blog.support.service.ApplicationTest;

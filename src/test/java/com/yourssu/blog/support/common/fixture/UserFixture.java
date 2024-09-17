@@ -1,10 +1,10 @@
 package com.yourssu.blog.support.common.fixture;
 
-import com.yourssu.blog.user.controller.dto.AuthenticateRequest;
-import com.yourssu.blog.user.controller.dto.UserCreateRequest;
-import com.yourssu.blog.user.model.User;
-import com.yourssu.blog.user.service.dto.TokenIssueRequest;
-import com.yourssu.blog.user.service.dto.UserSaveRequest;
+import com.yourssu.blog.controller.dto.AuthenticateRequest;
+import com.yourssu.blog.controller.dto.UserCreateRequest;
+import com.yourssu.blog.model.User;
+import com.yourssu.blog.service.dto.TokenIssueRequest;
+import com.yourssu.blog.service.dto.UserSaveRequest;
 
 public enum UserFixture {
 

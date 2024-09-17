@@ -1,9 +1,9 @@
 package com.yourssu.blog.controller;
 
-import com.yourssu.blog.comment.controller.dto.CommentCreateRequest;
-import com.yourssu.blog.comment.controller.dto.CommentEditRequest;
-import com.yourssu.blog.article.service.dto.ArticleResponse;
-import com.yourssu.blog.comment.service.dto.CommentResponse;
+import com.yourssu.blog.controller.dto.CommentCreateRequest;
+import com.yourssu.blog.controller.dto.CommentEditRequest;
+import com.yourssu.blog.service.dto.ArticleResponse;
+import com.yourssu.blog.service.dto.CommentResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import com.yourssu.blog.support.common.fixture.CommentFixture;

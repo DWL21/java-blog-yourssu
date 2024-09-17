@@ -1,12 +1,8 @@
 package com.yourssu.blog.service;
 
-import com.yourssu.blog.article.service.ArticleService;
-import com.yourssu.blog.article.service.dto.ArticleDeleteRequest;
-import com.yourssu.blog.article.service.dto.ArticleResponse;
-import com.yourssu.blog.article.service.dto.ArticleSaveRequest;
-import com.yourssu.blog.article.service.dto.ArticleUpdateRequest;
-import com.yourssu.blog.user.model.User;
-import com.yourssu.blog.user.model.repository.UserRepository;
+import com.yourssu.blog.model.User;
+import com.yourssu.blog.model.repository.UserRepository;
+import com.yourssu.blog.service.dto.*;
 import com.yourssu.blog.support.common.fixture.UserFixture;
 import com.yourssu.blog.support.service.ApplicationTest;
 import org.junit.jupiter.api.DisplayName;

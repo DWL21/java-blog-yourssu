@@ -1,12 +1,9 @@
 package com.yourssu.blog.service;
 
-import com.yourssu.blog.user.model.User;
-import com.yourssu.blog.user.model.repository.UserRepository;
+import com.yourssu.blog.model.User;
+import com.yourssu.blog.model.repository.UserRepository;
+import com.yourssu.blog.service.dto.*;
 import com.yourssu.blog.support.service.ApplicationTest;
-import com.yourssu.blog.user.service.UserService;
-import com.yourssu.blog.user.service.dto.TokenIssueRequest;
-import com.yourssu.blog.user.service.dto.TokenResponse;
-import com.yourssu.blog.user.service.dto.UserSaveRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

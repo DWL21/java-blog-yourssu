@@ -1,6 +1,5 @@
 package com.yourssu.blog.config.support;
 
-import com.yourssu.blog.common.config.support.Encrypt;
 import com.yourssu.blog.support.service.ApplicationTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;

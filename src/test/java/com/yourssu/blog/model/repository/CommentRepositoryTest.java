@@ -1,13 +1,10 @@
 package com.yourssu.blog.model.repository;
 
-import com.yourssu.blog.article.model.repository.ArticleRepository;
-import com.yourssu.blog.comment.model.repository.CommentRepository;
-import com.yourssu.blog.article.model.Article;
-import com.yourssu.blog.comment.model.Comment;
-import com.yourssu.blog.user.model.User;
+import com.yourssu.blog.model.Article;
+import com.yourssu.blog.model.Comment;
+import com.yourssu.blog.model.User;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import com.yourssu.blog.support.common.fixture.UserFixture;
-import com.yourssu.blog.user.model.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static com.yourssu.blog.support.common.fixture.CommentFixture.LEO;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
