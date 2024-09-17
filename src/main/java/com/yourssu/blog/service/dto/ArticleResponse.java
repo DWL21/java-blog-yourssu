@@ -17,7 +17,7 @@ public class ArticleResponse implements Serializable {
     private String title;
     private String content;
 
-    public ArticleResponse(final Long articleId,
+    private ArticleResponse(final Long articleId,
                            final String email,
                            final String title,
                            final String content) {
