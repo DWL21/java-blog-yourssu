@@ -15,7 +15,7 @@ public class JwtTokenProvider {
     private final SecretKey secretKey;
     private final long expirationTime;
 
-    private final String TOKEN_SIGN = "Bearer ";
+    private static final String TOKEN_SIGN = "Bearer ";
 
     public JwtTokenProvider(@Value("${security.jwt.token.secret-key}") final String secretKey,
                             @Value("${security.jwt.token.expiration-time}") final Long expirationTime) {
