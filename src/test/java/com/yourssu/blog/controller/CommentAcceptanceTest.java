@@ -86,7 +86,7 @@ public class CommentAcceptanceTest extends AcceptanceTest {
         return "/api/articles/" + articleId + "/comments/" + commentId;
     }
 
-    public static CommentResponse createComment(Long articleId, CommentFixture comment, String token) {
+    private static CommentResponse createComment(Long articleId, CommentFixture comment, String token) {
         CommentCreateRequest request = comment.getCommentCreateRequest();
         return invokePostWithToken(generateCommentRequestUri(articleId), token, request).as(CommentResponse.class);
     }
