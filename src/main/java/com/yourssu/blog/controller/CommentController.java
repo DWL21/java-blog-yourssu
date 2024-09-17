@@ -2,8 +2,8 @@ package com.yourssu.blog.controller;
 
 import com.yourssu.blog.controller.dto.CommentCreateRequest;
 import com.yourssu.blog.controller.dto.CommentEditRequest;
-import com.yourssu.blog.controller.dto.CommentRemoveRequest;
 import com.yourssu.blog.service.CommentService;
+import com.yourssu.blog.service.dto.CommentDeleteRequest;
 import com.yourssu.blog.service.dto.CommentRequest;
 import com.yourssu.blog.service.dto.CommentResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,26 +19,38 @@ public class CommentController {
     private final CommentService commentService;
 
     @GetMapping("/{commentId}")
-    public ResponseEntity<CommentResponse> show(@PathVariable Long articleId, @PathVariable Long commentId) {
+    public ResponseEntity<CommentResponse> show(
+            @PathVariable Long articleId,
+            @PathVariable Long commentId) {
         CommentResponse comment = commentService.findCommentById(new CommentRequest(articleId, commentId));
         return ResponseEntity.ok(comment);
     }
 
     @PostMapping
-    public ResponseEntity<CommentResponse> create(@PathVariable Long articleId, @RequestBody CommentCreateRequest request) {
-        CommentResponse comment = commentService.save(request.toCommentSaveRequest(articleId));
+    public ResponseEntity<CommentResponse> create(
+            @PathVariable Long articleId,
+            @RequestBody CommentCreateRequest request,
+            @LoginUserId Long userId) {
+        CommentResponse comment = commentService.save(request.toCommentSaveRequest(articleId, userId));
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
     }
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<CommentResponse> edit(@PathVariable Long articleId, @PathVariable Long commentId, @RequestBody CommentEditRequest request) {
-        CommentResponse response = commentService.update(request.toCommentUpdateRequest(articleId, commentId));
+    public ResponseEntity<CommentResponse> edit(
+            @PathVariable Long articleId,
+            @PathVariable Long commentId,
+            @RequestBody CommentEditRequest request,
+            @LoginUserId Long userId) {
+        CommentResponse response = commentService.update(request.toCommentUpdateRequest(articleId, commentId, userId));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> delete(@PathVariable Long articleId, @PathVariable Long commentId, @RequestBody CommentRemoveRequest request) {
-        commentService.delete(request.toDeleteRequest(articleId, commentId));
+    public ResponseEntity<Void> delete(
+            @PathVariable Long articleId,
+            @PathVariable Long commentId,
+            @LoginUserId Long userId) {
+        commentService.delete(new CommentDeleteRequest(new CommentRequest(articleId, commentId), userId));
         return ResponseEntity.noContent().build();
     }
 }

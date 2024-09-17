@@ -1,6 +1,7 @@
 package com.yourssu.blog.service.dto;
 
 import com.yourssu.blog.model.Comment;
+import com.yourssu.blog.model.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +25,10 @@ public class CommentResponse implements Serializable {
     }
 
     public static CommentResponse of(final Comment comment) {
+        User user = comment.getUser();
         return new CommentResponse(
                 comment.getCommentId(),
-                comment.getEmail(),
+                user.getEmail(),
                 comment.getContent());
     }
 }
