@@ -1,4 +1,4 @@
-package com.yourssu.blog.controller;
+package com.yourssu.blog.user.controller;
 
 import com.yourssu.blog.user.controller.dto.AuthenticateRequest;
 import com.yourssu.blog.user.controller.dto.UserCreateRequest;
