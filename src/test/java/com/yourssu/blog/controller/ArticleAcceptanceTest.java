@@ -2,13 +2,15 @@ package com.yourssu.blog.controller;
 
 import com.yourssu.blog.controller.dto.ArticleCreateRequest;
 import com.yourssu.blog.controller.dto.ArticleEditRequest;
-import com.yourssu.blog.controller.dto.ArticleRemoveRequest;
 import com.yourssu.blog.service.dto.ArticleResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
+import com.yourssu.blog.support.common.fixture.UserFixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
+import static com.yourssu.blog.controller.UserAcceptanceTest.authenticate;
+import static com.yourssu.blog.controller.UserAcceptanceTest.createUser;
 import static com.yourssu.blog.support.acceptance.AcceptanceContext.*;
 import static com.yourssu.blog.support.common.fixture.ArticleFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,10 +22,12 @@ class ArticleAcceptanceTest extends AcceptanceTest {
     @Test
     void 게시글_생성을_요청한다() {
         // Given
+        createUser(UserFixture.LEO);
+        String token = authenticate(UserFixture.LEO).getToken();
         ArticleCreateRequest request = LEO.getArticleCreateRequest();
 
         // When
-        invokePost("/api/articles", request);
+        invokePostWithToken("/api/articles", token, request);
 
         //Then
         var response = invokeGet("/api/articles/1");
@@ -38,12 +42,14 @@ class ArticleAcceptanceTest extends AcceptanceTest {
     @Test
     void 게시글_수정을_요청한다() {
         // Given
-        ArticleResponse article = createArticle(LEO);
+        createUser(UserFixture.LEO);
+        String token = authenticate(UserFixture.LEO).getToken();
+        ArticleResponse article = createArticle(LEO, token);
 
         // When
         ArticleEditRequest request = EVOLVED_LEO.getArticleEditRequest();
 
-        var response = invokePut("/api/articles/" + article.getArticleId(), request);
+        var response = invokePutWihToken("/api/articles/" + article.getArticleId(), token, request);
         ArticleResponse actual = response.as(ArticleResponse.class);
 
         assertAll(
@@ -55,20 +61,20 @@ class ArticleAcceptanceTest extends AcceptanceTest {
     @Test
     void 게시글_삭제를_요청한다() {
         // Given
-        ArticleResponse article = createArticle(LEO);
+        createUser(UserFixture.LEO);
+        String token = authenticate(UserFixture.LEO).getToken();
+        ArticleResponse article = createArticle(LEO, token);
 
         // When
-        ArticleRemoveRequest request = LEO.getArticleRemoveRequest();
-
-        var response = invokeDelete("/api/articles/" + article.getArticleId(), request);
+        var response = invokeDeleteWithToken("/api/articles/" + article.getArticleId(), token);
 
         assertAll(
                 () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value())
         );
     }
 
-    public static ArticleResponse createArticle(ArticleFixture article) {
+    public static ArticleResponse createArticle(ArticleFixture article, String token) {
         ArticleCreateRequest request = article.getArticleCreateRequest();
-        return invokePost("/api/articles", request).as(ArticleResponse.class);
+        return invokePostWithToken("/api/articles", token, request).as(ArticleResponse.class);
     }
 }

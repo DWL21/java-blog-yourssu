@@ -1,10 +1,11 @@
 package com.yourssu.blog.service.dto;
 
 import com.yourssu.blog.model.Article;
+import com.yourssu.blog.model.User;
 
-public record ArticleSaveRequest(String email, String password, String title, String content) {
+public record ArticleSaveRequest(Long userId, String title, String content) {
 
-    public Article getArticle() {
-        return new Article(email, title, content);
+    public Article getArticle(User user) {
+        return new Article(user, title, content);
     }
 }

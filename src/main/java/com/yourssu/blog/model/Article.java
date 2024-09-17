@@ -16,8 +16,9 @@ public class Article extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long articleId;
 
-    @Column(nullable = false)
-    private String email;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(nullable = false)
     private String title;
@@ -25,19 +26,26 @@ public class Article extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    public Article(String email, String title, String content) {
-        this(null, email, title, content);
+    public Article(User user, String title, String content) {
+        this(null, user, title, content);
     }
 
-    public Article(Long articleId, String email, String title, String content) {
+    public Article(Long articleId, User user, String title, String content) {
         this.articleId = articleId;
-        this.email = email;
+        this.user = user;
         this.title = title;
         this.content = content;
     }
 
     public void update(Article article) {
+        validateUser(article.user);
         this.title = article.title;
         this.content = article.content;
+    }
+
+    public void validateUser(User user) {
+        if (!this.user.equals(user)) {
+            throw new IllegalArgumentException("Article does not belong to user");
+        }
     }
 }
