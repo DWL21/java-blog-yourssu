@@ -30,7 +30,7 @@ public enum CommentFixture {
     }
 
     public CommentSaveRequest getCommentSaveRequest(Article article, Long userId) {
-        return new CommentSaveRequest(article.getArticleId(), userId, content);
+        return new CommentSaveRequest(article.getId(), userId, content);
     }
 
     public CommentEditRequest getCommentEditRequest() {
@@ -39,12 +39,12 @@ public enum CommentFixture {
 
     public CommentUpdateRequest getCommentUpdateRequest(Article article, Long commentId, Long userId) {
         return new CommentUpdateRequest(
-                new CommentRequest(article.getArticleId(), commentId),
+                new CommentRequest(article.getId(), commentId),
                 userId,
                 content);
     }
 
     public CommentDeleteRequest getCommentDeleteRequest(Article article, Long commentId, Long userId) {
-        return new CommentDeleteRequest(new CommentRequest(article.getArticleId(), commentId), userId);
+        return new CommentDeleteRequest(new CommentRequest(article.getId(), commentId), userId);
     }
 }

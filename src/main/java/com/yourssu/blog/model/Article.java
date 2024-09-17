@@ -14,7 +14,8 @@ public class Article extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long articleId;
+    @Column(name = "article_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -30,8 +31,8 @@ public class Article extends BaseEntity {
         this(null, user, title, content);
     }
 
-    public Article(Long articleId, User user, String title, String content) {
-        this.articleId = articleId;
+    public Article(Long id, User user, String title, String content) {
+        this.id = id;
         this.user = user;
         this.title = title;
         this.content = content;

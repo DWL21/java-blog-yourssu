@@ -13,7 +13,8 @@ public class Comment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long commentId;
+    @Column(name = "comment_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id", nullable = false)
@@ -30,8 +31,8 @@ public class Comment extends BaseEntity {
         this(null, article, user, content);
     }
 
-    public Comment(Long commentId, Article article, User user, String content) {
-        this.commentId = commentId;
+    public Comment(Long id, Article article, User user, String content) {
+        this.id = id;
         this.article = article;
         this.user = user;
         this.content = content;

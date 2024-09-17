@@ -30,7 +30,7 @@ public class ArticleResponse implements Serializable {
     public static ArticleResponse of(final Article article) {
         User user = article.getUser();
         return new ArticleResponse(
-                article.getArticleId(),
+                article.getId(),
                 user.getEmail(),
                 article.getTitle(),
                 article.getContent());
