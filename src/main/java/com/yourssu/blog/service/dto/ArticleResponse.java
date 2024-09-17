@@ -1,6 +1,7 @@
 package com.yourssu.blog.service.dto;
 
 import com.yourssu.blog.model.Article;
+import com.yourssu.blog.model.User;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -27,9 +28,10 @@ public class ArticleResponse implements Serializable {
     }
 
     public static ArticleResponse of(final Article article) {
+        User user = article.getUser();
         return new ArticleResponse(
                 article.getArticleId(),
-                article.getEmail(),
+                user.getEmail(),
                 article.getTitle(),
                 article.getContent());
     }

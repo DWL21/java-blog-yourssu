@@ -1,9 +1,9 @@
 package com.yourssu.blog.service;
 
-import com.yourssu.blog.service.dto.ArticleDeleteRequest;
-import com.yourssu.blog.service.dto.ArticleResponse;
-import com.yourssu.blog.service.dto.ArticleSaveRequest;
-import com.yourssu.blog.service.dto.ArticleUpdateRequest;
+import com.yourssu.blog.model.User;
+import com.yourssu.blog.model.repository.UserRepository;
+import com.yourssu.blog.service.dto.*;
+import com.yourssu.blog.support.common.fixture.UserFixture;
 import com.yourssu.blog.support.service.ApplicationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,14 @@ class ArticleServiceTest {
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Test
     @DisplayName("게시글을 생성한다.")
     void save() {
-        ArticleSaveRequest request = LEO.getArticleSaveRequest();
+        User user = saveUser(UserFixture.LEO);
+        ArticleSaveRequest request = LEO.getArticleSaveRequest(user.getId());
 
         assertThatNoException().isThrownBy(
                 () -> articleService.save(request)
@@ -31,9 +35,10 @@ class ArticleServiceTest {
     @Test
     @DisplayName("게시글을 수정한다.")
     void update() {
-        ArticleResponse given = articleService.save(LEO.getArticleSaveRequest());
+        User user = saveUser(UserFixture.LEO);
+        ArticleResponse article = articleService.save(LEO.getArticleSaveRequest(user.getId()));
 
-        ArticleUpdateRequest request = EVOLVED_LEO.getArticleUpdateRequest(given.getArticleId());
+        ArticleUpdateRequest request = EVOLVED_LEO.getArticleUpdateRequest(article.getArticleId(), user.getId());
 
         assertThatNoException().isThrownBy(
                 () -> articleService.update(request)
@@ -43,12 +48,17 @@ class ArticleServiceTest {
     @Test
     @DisplayName("게시글을 삭제한다.")
     void delete() {
-        ArticleResponse given = articleService.save(LEO.getArticleSaveRequest());
+        User user = saveUser(UserFixture.LEO);
+        ArticleResponse given = articleService.save(LEO.getArticleSaveRequest(user.getId()));
 
-        ArticleDeleteRequest request = LEO.getArticleDeleteRequest(given.getArticleId());
+        ArticleDeleteRequest request = LEO.getArticleDeleteRequest(given.getArticleId(), user.getId());
 
         assertThatNoException().isThrownBy(
                 () -> articleService.delete(request)
         );
+    }
+
+    private User saveUser(UserFixture user) {
+        return userRepository.save(user.getUser());
     }
 }
