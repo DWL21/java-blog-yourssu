@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 class ArticleAcceptanceTest extends AcceptanceTest {
 
     @Test
-    void 게시글_생성을_요청한다() {
+    void 게시글_작성을_요청한다() {
         // Given
         createUser(UserFixture.LEO);
         String token = authenticate(UserFixture.LEO).getToken();
