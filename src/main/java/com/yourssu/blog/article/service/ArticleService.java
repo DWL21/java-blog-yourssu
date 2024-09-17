@@ -1,6 +1,7 @@
 package com.yourssu.blog.article.service;
 
 import com.yourssu.blog.article.model.Article;
+import com.yourssu.blog.article.model.repository.CommentArticleRepository;
 import com.yourssu.blog.user.model.User;
 import com.yourssu.blog.article.model.repository.ArticleRepository;
 import com.yourssu.blog.user.model.repository.UserRepository;
@@ -19,6 +20,7 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
+    private final CommentArticleRepository commentArticleRepository;
 
     @Transactional(readOnly = true)
     public ArticleResponse findArticleById(final Long id) {
@@ -44,6 +46,6 @@ public class ArticleService {
         User user = userRepository.get(request.userId());
         Article article = articleRepository.get(request.articleId());
         article.validateUser(user);
-        articleRepository.delete(article);
+        commentArticleRepository.deleteArticleWithComments(article);
     }
 }
