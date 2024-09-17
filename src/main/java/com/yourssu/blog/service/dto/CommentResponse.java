@@ -27,7 +27,7 @@ public class CommentResponse implements Serializable {
     public static CommentResponse of(final Comment comment) {
         User user = comment.getUser();
         return new CommentResponse(
-                comment.getCommentId(),
+                comment.getId(),
                 user.getEmail(),
                 comment.getContent());
     }

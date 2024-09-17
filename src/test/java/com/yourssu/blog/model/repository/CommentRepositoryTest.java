@@ -36,7 +36,7 @@ class CommentRepositoryTest {
         Comment comment = LEO.getComment(article, user);
         Comment expected = commentRepository.save(comment);
 
-        Comment actual = commentRepository.get(expected.getCommentId());
+        Comment actual = commentRepository.get(expected.getId());
 
         assertThat(actual).isEqualTo(expected);
     }

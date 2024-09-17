@@ -28,7 +28,7 @@ class ArticleRepositoryTest {
         User user = userRepository.save(UserFixture.LEO.getUser());
         Article expected = articleRepository.save(LEO.getArticle(user));
 
-        Article actual = articleRepository.get(expected.getArticleId());
+        Article actual = articleRepository.get(expected.getId());
 
         assertThat(actual).isEqualTo(expected);
     }
