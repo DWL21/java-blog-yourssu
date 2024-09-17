@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class CommentAcceptanceTest extends AcceptanceTest {
 
     @Test
-    void 댓글_생성을_요청한다() {
+    void 댓글_작성을_요청한다() {
         // Given
         createUser(UserFixture.LEO);
         String token = authenticate(UserFixture.LEO).getToken();
