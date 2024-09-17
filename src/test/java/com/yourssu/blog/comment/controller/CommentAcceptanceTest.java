@@ -1,5 +1,6 @@
-package com.yourssu.blog.controller;
+package com.yourssu.blog.comment.controller;
 
+import com.yourssu.blog.article.controller.ArticleAcceptanceTest;
 import com.yourssu.blog.comment.controller.dto.CommentCreateRequest;
 import com.yourssu.blog.comment.controller.dto.CommentEditRequest;
 import com.yourssu.blog.article.service.dto.ArticleResponse;
@@ -11,8 +12,8 @@ import com.yourssu.blog.support.common.fixture.UserFixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import static com.yourssu.blog.controller.UserAcceptanceTest.authenticate;
-import static com.yourssu.blog.controller.UserAcceptanceTest.createUser;
+import static com.yourssu.blog.user.controller.UserAcceptanceTest.authenticate;
+import static com.yourssu.blog.user.controller.UserAcceptanceTest.createUser;
 import static com.yourssu.blog.support.acceptance.AcceptanceContext.*;
 import static com.yourssu.blog.support.common.fixture.CommentFixture.EVOLVED_LEO;
 import static com.yourssu.blog.support.common.fixture.CommentFixture.LEO;

@@ -1,9 +1,8 @@
-package com.yourssu.blog.service;
+package com.yourssu.blog.user.service;
 
 import com.yourssu.blog.user.model.User;
 import com.yourssu.blog.user.model.repository.UserRepository;
 import com.yourssu.blog.support.service.ApplicationTest;
-import com.yourssu.blog.user.service.UserService;
 import com.yourssu.blog.user.service.dto.TokenIssueRequest;
 import com.yourssu.blog.user.service.dto.TokenResponse;
 import com.yourssu.blog.user.service.dto.UserSaveRequest;

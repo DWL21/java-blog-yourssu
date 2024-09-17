@@ -1,6 +1,5 @@
-package com.yourssu.blog.service;
+package com.yourssu.blog.article.service;
 
-import com.yourssu.blog.article.service.ArticleService;
 import com.yourssu.blog.article.service.dto.ArticleDeleteRequest;
 import com.yourssu.blog.article.service.dto.ArticleResponse;
 import com.yourssu.blog.article.service.dto.ArticleSaveRequest;

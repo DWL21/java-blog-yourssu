@@ -1,6 +1,5 @@
-package com.yourssu.blog.config.support;
+package com.yourssu.blog.common.config.support;
 
-import com.yourssu.blog.common.config.support.JwtTokenProvider;
 import com.yourssu.blog.support.service.ApplicationTest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

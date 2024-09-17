@@ -1,4 +1,4 @@
-package com.yourssu.blog.controller;
+package com.yourssu.blog.article.controller;
 
 import com.yourssu.blog.article.controller.dto.ArticleCreateRequest;
 import com.yourssu.blog.article.controller.dto.ArticleEditRequest;
@@ -9,15 +9,15 @@ import com.yourssu.blog.support.common.fixture.UserFixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import static com.yourssu.blog.controller.UserAcceptanceTest.authenticate;
-import static com.yourssu.blog.controller.UserAcceptanceTest.createUser;
+import static com.yourssu.blog.user.controller.UserAcceptanceTest.authenticate;
+import static com.yourssu.blog.user.controller.UserAcceptanceTest.createUser;
 import static com.yourssu.blog.support.acceptance.AcceptanceContext.*;
 import static com.yourssu.blog.support.common.fixture.ArticleFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SuppressWarnings("NonAsciiCharacters")
-class ArticleAcceptanceTest extends AcceptanceTest {
+public class ArticleAcceptanceTest extends AcceptanceTest {
 
     @Test
     void 게시글_작성을_요청한다() {

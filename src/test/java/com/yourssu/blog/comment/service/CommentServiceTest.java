@@ -1,7 +1,6 @@
-package com.yourssu.blog.service;
+package com.yourssu.blog.comment.service;
 
 import com.yourssu.blog.article.model.Article;
-import com.yourssu.blog.comment.service.CommentService;
 import com.yourssu.blog.comment.service.dto.CommentDeleteRequest;
 import com.yourssu.blog.comment.service.dto.CommentResponse;
 import com.yourssu.blog.comment.service.dto.CommentSaveRequest;
