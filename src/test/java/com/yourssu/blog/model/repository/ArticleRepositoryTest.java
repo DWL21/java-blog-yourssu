@@ -1,8 +1,10 @@
 package com.yourssu.blog.model.repository;
 
-import com.yourssu.blog.model.Article;
-import com.yourssu.blog.model.User;
+import com.yourssu.blog.article.model.repository.ArticleRepository;
+import com.yourssu.blog.article.model.Article;
+import com.yourssu.blog.user.model.User;
 import com.yourssu.blog.support.common.fixture.UserFixture;
+import com.yourssu.blog.user.model.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
