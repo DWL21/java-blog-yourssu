@@ -18,7 +18,7 @@ import static com.yourssu.blog.support.common.fixture.CommentFixture.LEO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.AUTO_CONFIGURED)
 class CommentRepositoryTest {
 
     @Autowired
