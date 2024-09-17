@@ -46,7 +46,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> delete(
+    public ResponseEntity<Void> remove(
             @PathVariable Long articleId,
             @PathVariable Long commentId,
             @LoginUserId Long userId) {
