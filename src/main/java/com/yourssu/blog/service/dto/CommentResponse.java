@@ -16,7 +16,7 @@ public class CommentResponse implements Serializable {
     private String email;
     private String content;
 
-    public CommentResponse(final Long commentId,
+    private CommentResponse(final Long commentId,
                            final String email,
                            final String content) {
         this.commentId = commentId;
