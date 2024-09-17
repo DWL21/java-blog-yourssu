@@ -1,8 +1,8 @@
 package com.yourssu.blog.service;
 
-import com.yourssu.blog.service.dto.TokenIssueRequest;
-import com.yourssu.blog.service.dto.TokenResponse;
-import com.yourssu.blog.service.dto.UserSaveRequest;
+import com.yourssu.blog.model.User;
+import com.yourssu.blog.model.repository.UserRepository;
+import com.yourssu.blog.service.dto.*;
 import com.yourssu.blog.support.service.ApplicationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,9 @@ public class UserServiceTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     @DisplayName("회원을 생성한다.")
@@ -49,5 +52,15 @@ public class UserServiceTest {
         assertThatThrownBy(
                 () -> userService.issueToken(request))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("회원을 삭제한다.")
+    void delete() {
+        User user = userRepository.save(LEO.getUser());
+
+        assertThatNoException().isThrownBy(
+                () -> userService.delete(user.getId())
+        );
     }
 }

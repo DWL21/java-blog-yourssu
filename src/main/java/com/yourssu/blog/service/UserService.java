@@ -45,4 +45,8 @@ public class UserService {
                 .build();
         return jwtTokenProvider.generateToken(claims);
     }
+
+    public void delete(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }
