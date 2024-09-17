@@ -24,7 +24,7 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<ArticleResponse> save(@RequestBody ArticleCreateRequest request, @LoginUserId Long userId) {
+    public ResponseEntity<ArticleResponse> create(@RequestBody ArticleCreateRequest request, @LoginUserId Long userId) {
         ArticleResponse article = articleService.save(request.toArticleSaveRequest(userId));
         return ResponseEntity.status(HttpStatus.CREATED).body(article);
     }
