@@ -1,14 +1,14 @@
 package com.yourssu.blog.support.common.fixture;
 
-import com.yourssu.blog.controller.dto.CommentCreateRequest;
-import com.yourssu.blog.controller.dto.CommentEditRequest;
-import com.yourssu.blog.model.Article;
-import com.yourssu.blog.model.Comment;
-import com.yourssu.blog.model.User;
-import com.yourssu.blog.service.dto.CommentDeleteRequest;
-import com.yourssu.blog.service.dto.CommentRequest;
-import com.yourssu.blog.service.dto.CommentSaveRequest;
-import com.yourssu.blog.service.dto.CommentUpdateRequest;
+import com.yourssu.blog.comment.controller.dto.CommentCreateRequest;
+import com.yourssu.blog.comment.controller.dto.CommentEditRequest;
+import com.yourssu.blog.article.model.Article;
+import com.yourssu.blog.comment.model.Comment;
+import com.yourssu.blog.user.model.User;
+import com.yourssu.blog.comment.service.dto.CommentDeleteRequest;
+import com.yourssu.blog.comment.service.dto.CommentRequest;
+import com.yourssu.blog.comment.service.dto.CommentSaveRequest;
+import com.yourssu.blog.comment.service.dto.CommentUpdateRequest;
 
 public enum CommentFixture {
 

@@ -1,9 +1,9 @@
 package com.yourssu.blog.controller;
 
-import com.yourssu.blog.controller.dto.AuthenticateRequest;
-import com.yourssu.blog.controller.dto.UserCreateRequest;
-import com.yourssu.blog.service.dto.TokenResponse;
-import com.yourssu.blog.service.dto.UserResponse;
+import com.yourssu.blog.user.controller.dto.AuthenticateRequest;
+import com.yourssu.blog.user.controller.dto.UserCreateRequest;
+import com.yourssu.blog.user.service.dto.TokenResponse;
+import com.yourssu.blog.user.service.dto.UserResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.UserFixture;
 import org.junit.jupiter.api.Test;

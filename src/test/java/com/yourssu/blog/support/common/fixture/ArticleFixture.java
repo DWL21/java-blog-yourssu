@@ -1,12 +1,12 @@
 package com.yourssu.blog.support.common.fixture;
 
-import com.yourssu.blog.controller.dto.ArticleCreateRequest;
-import com.yourssu.blog.controller.dto.ArticleEditRequest;
-import com.yourssu.blog.model.Article;
-import com.yourssu.blog.model.User;
-import com.yourssu.blog.service.dto.ArticleDeleteRequest;
-import com.yourssu.blog.service.dto.ArticleSaveRequest;
-import com.yourssu.blog.service.dto.ArticleUpdateRequest;
+import com.yourssu.blog.article.controller.dto.ArticleCreateRequest;
+import com.yourssu.blog.article.controller.dto.ArticleEditRequest;
+import com.yourssu.blog.article.model.Article;
+import com.yourssu.blog.user.model.User;
+import com.yourssu.blog.article.service.dto.ArticleDeleteRequest;
+import com.yourssu.blog.article.service.dto.ArticleSaveRequest;
+import com.yourssu.blog.article.service.dto.ArticleUpdateRequest;
 
 public enum ArticleFixture {
 

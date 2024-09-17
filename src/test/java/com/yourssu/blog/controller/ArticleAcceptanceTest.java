@@ -1,8 +1,8 @@
 package com.yourssu.blog.controller;
 
-import com.yourssu.blog.controller.dto.ArticleCreateRequest;
-import com.yourssu.blog.controller.dto.ArticleEditRequest;
-import com.yourssu.blog.service.dto.ArticleResponse;
+import com.yourssu.blog.article.controller.dto.ArticleCreateRequest;
+import com.yourssu.blog.article.controller.dto.ArticleEditRequest;
+import com.yourssu.blog.article.service.dto.ArticleResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.ArticleFixture;
 import com.yourssu.blog.support.common.fixture.UserFixture;
