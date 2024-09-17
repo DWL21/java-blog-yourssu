@@ -9,6 +9,7 @@ import com.yourssu.blog.support.common.fixture.UserFixture;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
+import static com.yourssu.blog.support.acceptance.AcceptanceContext.invokeDeleteWithToken;
 import static com.yourssu.blog.support.acceptance.AcceptanceContext.invokePost;
 import static com.yourssu.blog.support.common.fixture.UserFixture.LEO;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,6 +46,20 @@ public class UserAcceptanceTest extends AcceptanceTest {
         //Then
         assertAll(
                 () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
+        );
+    }
+
+    @Test
+    void 회원_삭제를_요청한다() {
+        // Given
+        createUser(UserFixture.LEO);
+        String token = authenticate(UserFixture.LEO).getToken();
+
+        // When
+        var response = invokeDeleteWithToken("/api/users", token);
+
+        assertAll(
+                () -> assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value())
         );
     }
 

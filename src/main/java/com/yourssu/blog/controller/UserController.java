@@ -28,4 +28,10 @@ public class UserController {
         TokenResponse response = userService.issueToken(request.toTokenIssueRequest());
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping()
+    public ResponseEntity<Void> remove(@LoginUserId Long userId) {
+        userService.delete(userId);
+        return ResponseEntity.noContent().build();
+    }
 }
