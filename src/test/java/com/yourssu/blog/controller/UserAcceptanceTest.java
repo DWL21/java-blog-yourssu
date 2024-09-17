@@ -1,6 +1,8 @@
 package com.yourssu.blog.controller;
 
+import com.yourssu.blog.controller.dto.AuthenticateRequest;
 import com.yourssu.blog.controller.dto.UserCreateRequest;
+import com.yourssu.blog.service.dto.TokenResponse;
 import com.yourssu.blog.service.dto.UserResponse;
 import com.yourssu.blog.support.acceptance.AcceptanceTest;
 import com.yourssu.blog.support.common.fixture.UserFixture;
@@ -49,5 +51,10 @@ public class UserAcceptanceTest extends AcceptanceTest {
     public static UserResponse createUser(UserFixture user) {
         UserCreateRequest request = user.getUserCreateRequest();
         return invokePost("/api/users", request).as(UserResponse.class);
+    }
+
+    public static TokenResponse authenticate(UserFixture user) {
+        AuthenticateRequest request = user.getAuthenticateRequest();
+        return invokePost("/api/users/token", request).as(TokenResponse.class);
     }
 }
