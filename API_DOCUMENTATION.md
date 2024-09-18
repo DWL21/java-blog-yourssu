@@ -137,6 +137,8 @@
 
 ```json
 {
+    "articleId" : 1,
+    "email" : "email@urssu.com",
     "title" : "title",
     "content" : "content"
 }
@@ -202,6 +204,8 @@
 
 ```json
 {
+    "commentId" : 1,
+    "email" : "email@urssu.com",
     "content" : "edited-content"
 }
 ```
@@ -224,6 +228,8 @@
 
 ```json
 {
+    "commentId" : 1,
+    "email" : "email@urssu.com",
     "content" : "content"
 }
 ```
