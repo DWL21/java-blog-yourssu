@@ -7,6 +7,7 @@ import com.yourssu.blog.comment.service.CommentService;
 import com.yourssu.blog.comment.service.dto.CommentDeleteRequest;
 import com.yourssu.blog.comment.service.dto.CommentRequest;
 import com.yourssu.blog.comment.service.dto.CommentResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<CommentResponse> create(
             @PathVariable Long articleId,
-            @RequestBody CommentCreateRequest request,
+            @Valid @RequestBody CommentCreateRequest request,
             @LoginUserId Long userId) {
         CommentResponse comment = commentService.save(request.toCommentSaveRequest(articleId, userId));
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
