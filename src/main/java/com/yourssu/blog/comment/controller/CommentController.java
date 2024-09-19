@@ -45,7 +45,7 @@ public class CommentController {
             @LoginUserId Long userId) {
         CommentResponse response = commentService.update(request.toCommentUpdateRequest(articleId, commentId, userId));
         if (response.getIsEdited()) {
-            ResponseEntity.status(HttpStatus.CREATED).body(response);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }
         return ResponseEntity.ok(response);
     }

@@ -40,7 +40,7 @@ public class CommentService {
         Article article = articleRepository.get(request.articleId());
         Comment comment = commentRepository.get(request.commentId());
         if (comment.equalsContent(request.getComment(article, user))) {
-            CommentResponse.of(comment);
+            return CommentResponse.of(comment);
         }
         comment.update(request.getComment(article, user));
         return CommentResponse.ofEdited(comment);
