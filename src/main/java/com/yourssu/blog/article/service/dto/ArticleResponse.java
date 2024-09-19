@@ -18,7 +18,10 @@ public class ArticleResponse implements Serializable {
     private String content;
     private Boolean isEdited;
 
-    public ArticleResponse(Long articleId, String email, String title, String content) {
+    public ArticleResponse(final Long articleId,
+                           final String email,
+                           final String title,
+                           final String content) {
         this(articleId, email, title, content, Boolean.FALSE);
     }
 
@@ -43,13 +46,13 @@ public class ArticleResponse implements Serializable {
                 article.getContent());
     }
 
-    public static ArticleResponse of(final Article article, final boolean isEdited) {
+    public static ArticleResponse ofEdited(final Article article) {
         User user = article.getUser();
         return new ArticleResponse(
                 article.getId(),
                 user.getEmail(),
                 article.getTitle(),
                 article.getContent(),
-                isEdited);
+                true);
     }
 }
