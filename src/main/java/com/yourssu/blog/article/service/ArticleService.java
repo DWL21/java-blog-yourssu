@@ -38,8 +38,11 @@ public class ArticleService {
     public ArticleResponse update(final ArticleUpdateRequest request) {
         User user = userRepository.get(request.userId());
         Article article = articleRepository.get(request.articleId());
+        if (article.equalsContext(request.getArticle(user))) {
+            return ArticleResponse.of(article);
+        }
         article.update(request.getArticle(user));
-        return ArticleResponse.of(article);
+        return ArticleResponse.of(article, true);
     }
 
     public void delete(final ArticleDeleteRequest request) {

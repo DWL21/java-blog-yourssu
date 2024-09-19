@@ -16,15 +16,22 @@ public class ArticleResponse implements Serializable {
     private String email;
     private String title;
     private String content;
+    private Boolean isEdited;
+
+    public ArticleResponse(Long articleId, String email, String title, String content) {
+        this(articleId, email, title, content, Boolean.FALSE);
+    }
 
     private ArticleResponse(final Long articleId,
-                           final String email,
-                           final String title,
-                           final String content) {
+                            final String email,
+                            final String title,
+                            final String content,
+                            final Boolean isEdited) {
         this.articleId = articleId;
         this.email = email;
         this.title = title;
         this.content = content;
+        this.isEdited = isEdited;
     }
 
     public static ArticleResponse of(final Article article) {
@@ -34,5 +41,15 @@ public class ArticleResponse implements Serializable {
                 user.getEmail(),
                 article.getTitle(),
                 article.getContent());
+    }
+
+    public static ArticleResponse of(final Article article, final boolean isEdited) {
+        User user = article.getUser();
+        return new ArticleResponse(
+                article.getId(),
+                user.getEmail(),
+                article.getTitle(),
+                article.getContent(),
+                isEdited);
     }
 }
