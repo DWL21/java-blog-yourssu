@@ -6,6 +6,7 @@ import com.yourssu.blog.article.controller.dto.ArticleEditRequest;
 import com.yourssu.blog.article.service.ArticleService;
 import com.yourssu.blog.article.service.dto.ArticleDeleteRequest;
 import com.yourssu.blog.article.service.dto.ArticleResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<ArticleResponse> create(@RequestBody ArticleCreateRequest request, @LoginUserId Long userId) {
+    public ResponseEntity<ArticleResponse> create(@Valid @RequestBody ArticleCreateRequest request, @LoginUserId Long userId) {
         ArticleResponse article = articleService.save(request.toArticleSaveRequest(userId));
         return ResponseEntity.status(HttpStatus.CREATED).body(article);
     }
