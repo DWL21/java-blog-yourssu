@@ -42,7 +42,7 @@ public class ArticleService {
             return ArticleResponse.of(article);
         }
         article.update(request.getArticle(user));
-        return ArticleResponse.of(article, true);
+        return ArticleResponse.ofEdited(article);
     }
 
     public void delete(final ArticleDeleteRequest request) {
