@@ -32,7 +32,7 @@ public class ArticleController {
     }
 
     @PutMapping("/{articleId}")
-    public ResponseEntity<ArticleResponse> edit(@PathVariable Long articleId, @RequestBody ArticleEditRequest request, @LoginUserId Long userId) {
+    public ResponseEntity<ArticleResponse> edit(@PathVariable Long articleId, @Valid @RequestBody ArticleEditRequest request, @LoginUserId Long userId) {
         ArticleResponse article = articleService.update(request.toArticleUpdateRequest(articleId, userId));
         return ResponseEntity.status(HttpStatus.CREATED).body(article);
     }
