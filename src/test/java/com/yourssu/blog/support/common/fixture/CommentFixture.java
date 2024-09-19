@@ -29,8 +29,8 @@ public enum CommentFixture {
         return new CommentCreateRequest(content);
     }
 
-    public CommentSaveRequest getCommentSaveRequest(Article article, Long userId) {
-        return new CommentSaveRequest(article.getId(), userId, content);
+    public CommentSaveRequest getCommentSaveRequest(Long articleId, Long userId) {
+        return new CommentSaveRequest(articleId, userId, content);
     }
 
     public CommentEditRequest getCommentEditRequest() {
