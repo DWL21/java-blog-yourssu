@@ -1,6 +1,9 @@
 package com.yourssu.blog.user.controller;
 
 import com.yourssu.blog.common.config.support.JwtTokenProvider;
+import com.yourssu.blog.common.exception.ForbiddenException;
+import com.yourssu.blog.common.exception.UnauthenticatedException;
+import com.yourssu.blog.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -27,12 +30,12 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
                                   WebDataBinderFactory binderFactory) {
         String token = webRequest.getHeader("Authorization");
         if (token == null || token.isEmpty()) {
-            throw new RuntimeException("Authorization Header is empty");
+            throw new UnauthenticatedException("Authorization 헤더가 비어 있습니다.");
         }
         try {
             return Long.valueOf(jwtTokenProvider.extractAllClaims(token).getSubject());
         } catch (Exception e) {
-            throw new RuntimeException("Invalid token", e);
+            throw new ForbiddenException("유효하지 않은 회원 인증 정보입니다.");
         }
     }
 }
