@@ -60,4 +60,8 @@ public class Comment extends BaseEntity {
             throw new InvalidRequestException("요청한 게시글 번호에 해당하는 댓글이 아닙니다.");
         }
     }
+
+    public boolean equalsContent(Comment comment) {
+        return this.content.equals(comment.content);
+    }
 }

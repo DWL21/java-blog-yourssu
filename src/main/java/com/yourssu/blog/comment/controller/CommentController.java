@@ -44,7 +44,10 @@ public class CommentController {
             @Valid @RequestBody CommentEditRequest request,
             @LoginUserId Long userId) {
         CommentResponse response = commentService.update(request.toCommentUpdateRequest(articleId, commentId, userId));
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        if (response.getIsEdited()) {
+            ResponseEntity.status(HttpStatus.CREATED).body(response);
+        }
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{commentId}")
