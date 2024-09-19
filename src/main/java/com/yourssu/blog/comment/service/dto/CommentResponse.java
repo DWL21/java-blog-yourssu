@@ -15,13 +15,23 @@ public class CommentResponse implements Serializable {
     private Long commentId;
     private String email;
     private String content;
+    private Boolean isEdited;
+
+    public CommentResponse(
+            final Long commentId,
+            final String email,
+            final String content) {
+        this(commentId, email, content, Boolean.FALSE);
+    }
 
     private CommentResponse(final Long commentId,
-                           final String email,
-                           final String content) {
+                            final String email,
+                            final String content,
+                            final Boolean isEdited) {
         this.commentId = commentId;
         this.email = email;
         this.content = content;
+        this.isEdited = isEdited;
     }
 
     public static CommentResponse of(final Comment comment) {
@@ -30,5 +40,14 @@ public class CommentResponse implements Serializable {
                 comment.getId(),
                 user.getEmail(),
                 comment.getContent());
+    }
+
+    public static CommentResponse ofEdited(final Comment comment) {
+        User user = comment.getUser();
+        return new CommentResponse(
+                comment.getId(),
+                user.getEmail(),
+                comment.getContent(),
+                true);
     }
 }
