@@ -50,6 +50,12 @@ public class GlobalControllerAdvice {
     }
 
     @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleException(ConflictException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleException(
             MethodArgumentNotValidException bindingResult) {
         String causes = bindingResult.getFieldErrors()
