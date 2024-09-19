@@ -12,9 +12,13 @@ public enum UserFixture {
             "leoPassword",
             "leo"
     ),
+    LEO_EMAIL_INCORRECT("incorrect-email",
+            "password",
+            "leo"),
+
     LEO_PASSWORD_INCORRECT("leo@yourssu.com",
-                "incorrectPassword",
-                "leo"
+            "incorrectPassword",
+            "leo"
     );
 
     private final String email;
