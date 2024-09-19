@@ -52,7 +52,7 @@ public class User extends BaseEntity {
 
     public void validatePassword(String password) {
         if (!this.password.equals(password)) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new InvalidRequestException("비밀번호가 일치하지 않습니다.");
         }
     }
 }
