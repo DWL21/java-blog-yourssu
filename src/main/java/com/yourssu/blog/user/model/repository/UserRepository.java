@@ -1,5 +1,6 @@
 package com.yourssu.blog.user.model.repository;
 
+import com.yourssu.blog.user.exception.UserNotFoundException;
 import com.yourssu.blog.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -47,10 +48,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(@Param("email") String email);
 
     default User get(Long id) {
-        return findById(id).orElseThrow(RuntimeException::new);
+        return findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     default User getByEmail(String email) {
-        return findByEmail(email).orElseThrow(RuntimeException::new);
+        return findByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 }
