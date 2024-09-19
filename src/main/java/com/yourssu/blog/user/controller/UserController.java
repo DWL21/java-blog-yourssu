@@ -5,6 +5,7 @@ import com.yourssu.blog.user.controller.dto.UserCreateRequest;
 import com.yourssu.blog.user.service.UserService;
 import com.yourssu.blog.user.service.dto.TokenResponse;
 import com.yourssu.blog.user.service.dto.UserResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UserCreateRequest request) {
+    public ResponseEntity<UserResponse> create(@Valid @RequestBody UserCreateRequest request) {
         UserResponse response = userService.save(request.toUserSaveRequest());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
