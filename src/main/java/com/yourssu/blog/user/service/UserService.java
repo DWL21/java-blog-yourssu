@@ -3,7 +3,6 @@ package com.yourssu.blog.user.service;
 import com.yourssu.blog.common.config.support.Encrypt;
 import com.yourssu.blog.common.config.support.JwtTokenProvider;
 import com.yourssu.blog.user.exception.ExistsUserException;
-import com.yourssu.blog.user.exception.NoExistsUserException;
 import com.yourssu.blog.user.model.User;
 import com.yourssu.blog.user.model.repository.UserRepository;
 import com.yourssu.blog.user.service.dto.TokenIssueRequest;
@@ -41,16 +40,9 @@ public class UserService {
     }
 
     public TokenResponse issueToken(TokenIssueRequest request) {
-        User user = userRepository.findByEmail(request.email())
-                .orElseThrow(NoExistsUserException::new);
+        User user = userRepository.getByEmail(request.email());
         user.validatePassword(encrypt.encrypt(request.password()));
         return TokenResponse.of(generateToken(user));
-    }
-
-    private void noExistsUser(String email) {
-        if (!userRepository.existsByEmail(email)) {
-            throw new NoExistsUserException();
-        }
     }
 
     private String generateToken(User user) {
