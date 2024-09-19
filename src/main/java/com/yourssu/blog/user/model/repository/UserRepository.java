@@ -43,6 +43,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
         deleteUser(user);
     }
 
+    @Query("select count(u) > 0 from User u where u.email = :email")
+    boolean existsByEmail(@Param("email") String email);
+
     default User get(Long id) {
         return findById(id).orElseThrow(RuntimeException::new);
     }

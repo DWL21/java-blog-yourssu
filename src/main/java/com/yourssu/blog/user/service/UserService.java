@@ -2,6 +2,7 @@ package com.yourssu.blog.user.service;
 
 import com.yourssu.blog.common.config.support.Encrypt;
 import com.yourssu.blog.common.config.support.JwtTokenProvider;
+import com.yourssu.blog.user.exception.ExistsUserException;
 import com.yourssu.blog.user.model.User;
 import com.yourssu.blog.user.model.repository.UserRepository;
 import com.yourssu.blog.user.service.dto.TokenIssueRequest;
@@ -27,8 +28,15 @@ public class UserService {
 
     public UserResponse save(UserSaveRequest request) {
         User user = new User(request.email(), encrypt.encrypt(request.password()), request.username());
+        existsUser(request.email());
         userRepository.save(user);
         return UserResponse.of(user);
+    }
+
+    private void existsUser(String email) {
+        if (userRepository.existsByEmail(email)) {
+            throw new ExistsUserException("이미 회원가입된 이메일입니다.");
+        }
     }
 
     public TokenResponse issueToken(TokenIssueRequest request) {
