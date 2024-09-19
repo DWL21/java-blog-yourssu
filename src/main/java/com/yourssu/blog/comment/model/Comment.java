@@ -1,6 +1,8 @@
 package com.yourssu.blog.comment.model;
 
 import com.yourssu.blog.article.model.Article;
+import com.yourssu.blog.common.exception.ForbiddenException;
+import com.yourssu.blog.common.exception.InvalidRequestException;
 import com.yourssu.blog.common.model.BaseEntity;
 import com.yourssu.blog.user.model.User;
 import jakarta.persistence.*;
@@ -49,13 +51,13 @@ public class Comment extends BaseEntity {
 
     public void validateUser(User user) {
         if (!this.user.equals(user)) {
-            throw new IllegalArgumentException("Article does not belong to user");
+            throw new ForbiddenException("댓글 작성자의 요청이 아닙니다.");
         }
     }
 
     public void validateArticle(Article article) {
         if (!article.equals(this.article)) {
-            throw new IllegalArgumentException("Article does not belong to article");
+            throw new InvalidRequestException("요청한 게시글 번호에 해당하는 댓글이 아닙니다.");
         }
     }
 }
