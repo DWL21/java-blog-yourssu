@@ -52,4 +52,8 @@ public class Article extends BaseEntity {
             throw new ForbiddenException("게시글 작성자의 요청이 아닙니다.");
         }
     }
+
+    public boolean equalsContext(Article article) {
+        return this.title.equals(article.title) && this.content.equals(article.content);
+    }
 }
