@@ -19,7 +19,11 @@ public enum UserFixture {
     LEO_PASSWORD_INCORRECT("leo@yourssu.com",
             "incorrectPassword",
             "leo"
-    );
+    ),
+    MIO("mio@yourssu.com",
+            "mioPassword",
+            "mio"),
+    ;
 
     private final String email;
     private final String password;
